@@ -8,7 +8,7 @@ class Seat{
 		passengerName="unnamed";
 	}
 
-	Seat(int searId,boolean isReserved,String passengerName){
+	Seat(int seatId,boolean isReserved,String passengerName){
 		this.seatId=seatId;
 		this.isReserved=isReserved;
 		this.passengerName=passengerName;
@@ -36,7 +36,7 @@ class Seat{
 	public boolean getIsReserved(){
 		return this.isReserved;
 	}
-	public String passengerName(){
+	public String getPassengerName(){
 		return this.passengerName;
 	}
 }
