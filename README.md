@@ -1,2 +1,2 @@
-# wei-wei-s-repository
-oh my little repository
+# Wei-Qin-s-repository
+Repository for practise
