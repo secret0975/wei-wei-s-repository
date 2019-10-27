@@ -9,7 +9,8 @@ class Menu{
     ans+="1. Add a bus"+"\n";
     ans+="2. Reservation"+"\n";
     ans+="3. Show buses information"+"\n";
-    ans+="4. Exit"+"\n";
+    ans+="4. Cancal a reservation"+"\n";
+    ans+="5. Exit"+"\n";
     ans+="Enter your choice (a number):"+"\n";
     System.out.print(ans);
   }
@@ -71,11 +72,28 @@ class Menu{
         break;
       case 3:
         System.out.println("Print bus information");
-        // for(int i=0;i<numOfBus;i++)
-          bus[0].printBusInfo();
+        for(int i=0;i<numOfBus;i++)
+          bus[i].printBusInfo();
         
         break;
       case 4:
+        System.out.println("Cancel a reservation");
+        String passengerName=getString("Please enter your name: ",inputScan);
+        int busNum=getInteger("Please enter bus ID: ",inputScan);
+        for(int i=0;i<bus[busNum].seat.length;i++){
+          for(int j=0;j<bus[busNum].seat[i].length;j++){
+            if(bus[busNum].seat[i][j].getPassengerName().equals(passengerName)){
+              bus[busNum].seat[i][j].setIsReserved(false);
+              bus[busNum].seat[i][j].setPassengerName("unnamed");
+              bus[busNum].numberOfSeatAvaliable--;
+              System.out.println("Cancelled");
+              break;
+            }
+          }
+        }
+        System.out.println("No passenger named: "+passengerName);
+        break;
+      case 5:
         System.out.println("Thank you for using");
         System.exit(0);
         break;
