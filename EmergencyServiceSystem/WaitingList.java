@@ -84,4 +84,49 @@ public class WaitingList {
         }
         return false;
     }
+    /**
+    * Remove patient with id in the waiting list
+    * @param int Patient ID
+    * return Patient
+    */
+    public Patient deleteNodeWithValue(int id){
+      if(this.head==null){
+        System.out.println("There is no patient in the waiting list!");
+        return null;
+      }
+      if(this.head.getPatient().getId()==id){
+        Node n=this.head;
+        this.head=this.head.getNext();
+        System.out.println(" Success! An ambulance is assigned for patient "+id);
+        numNodes--;
+        return n.getPatient();
+      }
+      Node current=this.head;
+      while(current.getNext()!=null){
+        if(current.getNext().getPatient().getId()==id){
+          System.out.println(" Success! An ambulance is assigned for patient "+id);
+          Node n=current.getNext();
+          current.setNext(current.getNext().getNext());
+          numNodes--;
+          return n.getPatient();
+        }
+        current=current.getNext();
+      }
+      System.out.println(" Failure! No patient with "+id+" in the waiting list!");
+      return null; 
+    }
+    public void checkPosition(int id){
+      Node temp=this.head;
+      int count=0;
+      while(temp!=null){
+        if(temp.getPatient().getId()==id){
+          System.out.println("There are "+count+" patient in front of patient "+id);
+          return;
+        }
+        temp=temp.getNext();
+        count++;
+      }
+      System.out.println("There is no patient with "+id+" in the waiting list");
+      return;
+    }
 }

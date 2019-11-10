@@ -62,6 +62,8 @@ public class Main {
         ans += ":: 1. Add Patient                                                            ::" + "\n";
         ans += ":: 2. Assign Ambulance For Patient                                           ::" + "\n";
         ans += ":: 3. Print Waiting List                                                     ::" + "\n";
+        ans += ":: 4. Assign Ambulance For Patient By Id ::"+"\n";
+        ans += ":: 5. Check Position By Id ::"+"\n";
         ans += ":: 0. Exit                                                                   ::" + "\n";
         ans += "===============================================================================" + "\n";
         System.out.println(ans);
@@ -71,7 +73,17 @@ public class Main {
         String ans = ":: Your option: ";
         System.out.println(ans);
         String _input = inputScan.nextLine();
-        int _option = Integer.parseInt(_input);
+        boolean gate;
+        int _option=-1;
+        do{
+          gate=false;
+          try{
+            _option = Integer.parseInt(_input);
+          }catch(NumberFormatException e){
+            System.out.println("Input must be an integer! Try again!");
+            gate=true;
+          }
+        }while(gate);
         for(int i = 0; i < optionsAvailable.length; i++)
             if(_option == optionsAvailable[i])
                 return _option;
@@ -107,7 +119,7 @@ public class Main {
         // TODO: The tester report that the system will crash when the input of triageLevel and id is not a number
         // TODO: The tester report that the system should only accept (1-5) as legal number 
         // TODO: The system should ask the user to input again if there is an illegal input
-        String id = "";
+        int id = 0;
         switch(_option){
             case 1:
                 clearScreen();
@@ -155,6 +167,34 @@ public class Main {
                 serviceCenter.printWaitingList();
                 waitInput(inputScan);
                 break;
+            case 4:
+                clearScreen();
+                printSubHeader("Assign ambulance by ID");
+                do{
+                  try{
+                    gate=false;
+                    id=Integer.parseInt(getInput(inputScan, "Please enter the id of the patient"));
+                  }catch(NumberFormatException e){
+                    System.out.println("Please enter an integer! Try again");
+                    gate=true;
+                  }
+                }while(gate); 
+                serviceCenter.assignAmbulanceById(id);
+                waitInput(inputScan);
+                break;
+            case 5:
+                do{
+                  try{
+                    gate=false;
+                    id=Integer.parseInt(getInput(inputScan, "Please enter the id of the patient"));
+                  }catch(NumberFormatException e){
+                    System.out.println("Please enter an integer! Try again");
+                    gate=true;
+                  }
+                }while(gate);
+                serviceCenter.checkPositionById(id); 
+                waitInput(inputScan);
+                break;
             case 0:
                 exitMessage();
                 return false;
@@ -167,7 +207,7 @@ public class Main {
         ServiceCenter serviceCenter = new ServiceCenter();
         initializeSystem(serviceCenter);
         Scanner inputScan = new Scanner(System.in);
-        int [] options = new int []{1,2,3,0};
+        int [] options = new int []{1,2,3,4,5,0};
         boolean _continue = true;
         while(_continue){
             clearScreen();

@@ -43,4 +43,10 @@ public class ServiceCenter {
     public void printWaitingList(){
         this.awl.printList();
     }
+    public Patient assignAmbulanceById(int id){
+      return this.awl.deleteNodeWithValue(id);
+    }
+    public void checkPositionById(int id){
+      this.awl.checkPosition(id);
+    }
 }
